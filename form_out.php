@@ -1,8 +1,8 @@
 <div>
     <form action="#" method = "POST">
-        <div>
+        <div style="height: 100px;">
             <br>
-            <input type="submit" name="Output_list" value="List users output">
+            <input type="submit" name="Output_list" value="List users output" class="btn_output">
         </div>
     </form>
 </div>

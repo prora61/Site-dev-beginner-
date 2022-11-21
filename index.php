@@ -15,7 +15,7 @@
                 </div>
             </div>
         </header>
-        <div>
+        <div class="menu__elem">
             <?php
                 $site_name = $_GET['name']??'0';
                 switch ($site_name){
