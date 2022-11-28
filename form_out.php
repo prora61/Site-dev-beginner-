@@ -17,7 +17,7 @@
         for($users=array();$row = $result->fetch_assoc(); $users[] = $row);
         foreach ($users as $k=>$v){
             echo "<p>$v[id] $v[login] $v[password]  "."<a href='?name=$v[login]'>Posts</a>"."</p>";
-        }      
+        }    
         $mysql->close();
     }
 

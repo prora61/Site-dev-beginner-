@@ -13,8 +13,8 @@
     </form>
 
     <?php
-        require_once ('connect_db.php');
         if(isset($_POST['submit'])){
+            require_once ('connect_db.php');
                         // real_escape_string   TESTING
             $log = filter_var(trim($_POST['login']), FILTER_SANITIZE_STRING);
             $pas = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
@@ -22,14 +22,13 @@
             $sql = "SELECT login, password FROM users WHERE login='$log' AND password='$pas_hash'";
             $result = $mysql->query($sql);
             $users = $result->fetch_assoc();
-
+            $mysql->close();
             if (mb_strlen($log) == '0' || mb_strlen($pas) == '0'){
                 echo "<br>Не ввели логин или пароль. Повторите вход в аккаунт";
             } else if (!$users) {
                 echo "<br>Username or password entered incorrectly. Try again";
             } else {
                 setcookie("username", $users['login'], time() + 60*60, "/");
-                $mysql->close();
                 header("Location: /php_entry/index.php");  
             }
          }

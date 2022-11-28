@@ -8,14 +8,14 @@
             $dir = "photo_users/";
             $uploaddir = $dir.$name;
             if (move_uploaded_file($tmp_name, $uploaddir)){
-                $sql = "UPDATE `users` SET `photo` = '$uploaddir' WHERE `login` = '$_COOKIE[username]'";
+                $sql = "UPDATE `users` SET `photo` = '$name' WHERE `login` = '$_COOKIE[username]'";
                 $mysql->query($sql);
-                $mysql->close();
             } else {
                 echo "<script>alert('ERRORS!');</script>";
             }
+            $mysql->close();
         }     
-        return true;
+        return $uploaddir;
     }
 
     function errors_photo($file){

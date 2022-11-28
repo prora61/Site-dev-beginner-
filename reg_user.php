@@ -13,8 +13,8 @@
     </form>
 
     <?php
-        require_once ('connect_db.php');
-        if(isset($_POST['Registration'])){           
+        if(isset($_POST['Registration'])){   
+            require_once ('connect_db.php');
             $log = filter_var(trim($_POST['login']), FILTER_SANITIZE_STRING);
             $pas = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
             $pas_hash = md5($pas."passsss");
@@ -22,8 +22,10 @@
             $log_check = $res->fetch_assoc();
             if (mb_strlen($log) == '0' || mb_strlen($pas) == '0'){
                 echo "<br>You didn't enter your username or password. Repeat the operation.";
+                $mysql->close();
             } else if (isset($log_check)) {
                 echo "<br>A user with this name already exists.";
+                $mysql->close();
             } else {
                 $sql = "INSERT INTO `users` (`login`, `password`) VALUES ('$log', '$pas_hash')";
                 $mysql->query($sql);
